@@ -6,7 +6,7 @@
 /*   By: lnicoter <lnicoter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 20:01:42 by lnicoter          #+#    #+#             */
-/*   Updated: 2023/02/16 14:34:14 by lnicoter         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:08:49 by lnicoter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static char	*ft_readrest(int fd, char *res)
 	char	*temp;
 	int		bytes;
 
-	temp = malloc(BUFFER_SIZE + 1);
+	temp = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!temp)
 		return (NULL);
 	bytes = 1;
@@ -85,7 +85,7 @@ static char	*ft_readrest(int fd, char *res)
 			return (NULL);
 		}
 		temp[bytes] = '\0';
-		res = ft_strjoin(res, temp);
+		res = ft_peppe(res, temp);
 	}
 	free(temp);
 	return (res);
@@ -157,6 +157,6 @@ char	*get_next_line(int fd)
 	if (!rest)
 		return (NULL);
 	line = ft_writing(rest);
-	ft_new_static(rest);
+	rest = ft_new_static(rest);
 	return (line);
 }

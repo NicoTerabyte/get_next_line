@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnicoter <lnicoter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 20:20:59 by lnicoter          #+#    #+#             */
-/*   Updated: 2023/02/16 14:25:35 by lnicoter         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:08:43 by lnicoter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,31 +34,31 @@ char	*ft_strdup(const char *s1)
 	return (s2);
 }
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_peppe(char *back, char *buff)
 {
+	char	*str;
 	size_t	i;
 	size_t	j;
-	char	*final;
-
-	if (!s1 || !s2)
+	if (!back)
+	{
+		back = malloc(1 * sizeof(char));
+		back[0] = '\0';
+	}
+	if (!back || !buff)
 		return (NULL);
-	i = 0;
+	str = malloc(sizeof(char) * ((ft_strlen(back) + ft_strlen(buff)) + 1));
+	if (str == NULL)
+		return (NULL);
+	i = -1;
 	j = 0;
-	final = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!final)
-		return (NULL);
-	while (i < ft_strlen(s1))
-	{
-		final[i] = s1[i];
-		i++;
-	}
-	while (j < ft_strlen(s2))
-	{
-		final [i + j] = s2[j];
-		j++;
-	}
-	final[i + j] = '\0';
-	return ((char *)final);
+	if (back)
+		while (back[++i] != '\0')
+			str[i] = back[i];
+	while (buff[j] != '\0')
+		str[i++] = buff[j++];
+	str[ft_strlen(back) + ft_strlen(buff)] = '\0';
+	free (back);
+	return (str);
 }
 
 char	*ft_strchr(const char *s, int c)
